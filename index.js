@@ -1,12 +1,9 @@
-let randomBtn = document.querySelector('#random');
-randomBtn.addEventListener('click', findRandomActivity());
-    
-   
-
-
-
-
-
+document.addEventListener('DOMContentLoaded', () => {
+    let randomBtn = document.querySelector('#random');
+    randomBtn.addEventListener('click', () => {
+        findRandomActivity();
+    });
+})
 
 
 
