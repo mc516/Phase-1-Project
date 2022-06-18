@@ -10,15 +10,41 @@
 </head>
 <body>
     <header>
-        <nav>
-            <h6>Dark Mode</h6>
+        <nav class="dark-mode">
+            <button><h6>Dark Mode</h6></button>
         </nav>
     </header>
 
     <div class="container">
         <h1>What To Do</h1>
-        <div id="activity"> Activities!</div>
-        <button id="random" class="'btn">What else?</button>
+        <div id="activity">
+            <h3>Activities!</h3>
+        </div>
+       
+        <button id="random" class="'btn">Random</button>
+
+        
+        <h1>Choose what type of activity</h1>
+        <form>
+            <label for="type">What type of activity?</label>
+            <select name="type">
+                <option value="recreational">recreational</option>
+                <option value="education">education</option>
+                <option value="social">social</option>
+                <option value="diy">diy</option>
+                <option value="charity">charity</option>
+                <option value="cooking">cooking</option>
+                <option value="relaxation">relaxation</option>
+                <option value="music">music</option>
+                <option value="busywork">busywork</option>
+            <br><br>
+            <input class="type-submit" type="submit" value="Find an activity!">
+        </form>
+
+        <div class="type-activity"><h3>ACTIVITY</h3></div>
+        <br><br>
+
+        
     </div>
    
 
