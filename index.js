@@ -8,14 +8,12 @@ document.addEventListener('DOMContentLoaded', () => {
     form.addEventListener('submit', e => {
         e.preventDefault();
         let filter = e.target.selector.value;
-        let filterActivity = filterActivity(filter);
+        //let filtered = filterActivity(filter);
         let activity = document.querySelector('filtered-activity')
-        activity.innerHTML= `${activity.activity}`
+        activity.addEventListener('click', () => console.log('click'))
+        //activity.innerHTML = filtered.activity
 
-    })
-
-    let findActivityBtn = document.querySelector('.type-submit')
-    
+    })   
 })
 
 
@@ -35,8 +33,9 @@ function filterActivity(type) {
     .then(data => {
         console.log(data)
         if(data.type === type) {
-            console.log('yay')
             return data.activity;
-        } else filterActivity(type)
+        } else {
+            filterActivity(type)
+        }
     })
 }
