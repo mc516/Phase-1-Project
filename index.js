@@ -1,15 +1,24 @@
 document.addEventListener('DOMContentLoaded', () => {
     let randomBtn = document.querySelector('#random');
+    //FIRST EVENT LISTERNER
     randomBtn.addEventListener('click', () => {
         findRandomActivity();
     });
 
     let form = document.querySelector('form');
+    //SECOND EVENT LISTERNER
     form.addEventListener('submit', e => {
         e.preventDefault();
         let filter = e.target.selector.value;
         filterActivity(filter);
-    })   
+    })  
+    
+    let darkModeBtn = document.querySelector('.dark-mode')
+    //THIRD EVENT LISTERN
+    darkModeBtn.addEventListener('click', () => {
+        console.log('click')
+    })
+
 })
 
 
