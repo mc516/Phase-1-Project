@@ -8,14 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     form.addEventListener('submit', e => {
         e.preventDefault();
         let filter = e.target.selector.value;
-        let filtered = filterActivity(filter);
-        console.log(filter)
-        console.log(filtered)
-        //console.log(filtered.activity)
-        let activity = document.querySelector('.filtered-activity')
-        activity.addEventListener('click', () => console.log('click'))
-        //activity.innerHTML = filtered.activity
-
+        filterActivity(filter);
     })   
 })
 
@@ -42,7 +35,8 @@ function filterActivity(type) {
             filterActivity(type)
         }
         console.log(result)
-        return result;
-        
+        let activity = document.querySelector('.filtered-activity')
+        activity.addEventListener('click', () => console.log('click'))
+        activity.innerHTML = `${result}`
     })
 }
