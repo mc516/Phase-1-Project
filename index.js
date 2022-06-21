@@ -17,6 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
     //THIRD EVENT LISTERN
     darkModeBtn.addEventListener('click', () => {
         console.log('click')
+        darkMode();
     })
 
 })
@@ -45,7 +46,11 @@ function filterActivity(type) {
         }
         console.log(result)
         let activity = document.querySelector('.filtered-activity')
-        activity.addEventListener('click', () => console.log('click'))
         activity.innerHTML = `${result}`
     })
+}
+
+function darkMode() {
+    let darkModeBtn = document.querySelector('.dark-mode')
+    console.log(darkModeBtn)
 }
