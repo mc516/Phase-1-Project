@@ -9,8 +9,8 @@ document.addEventListener('DOMContentLoaded', () => {
     //SECOND EVENT LISTERNER
     form.addEventListener('submit', e => {
         e.preventDefault();
-        let filter = e.target.selector.value;
-        filterActivity(filter);
+        let type = e.target.selector.value;
+        filterActivity(type);
     })  
     
     let darkModeBtn = document.querySelector('.dark-mode')
