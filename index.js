@@ -23,16 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let randomList = document.querySelector('.random-list')
     //FOURTH EVENT LISTENER WITH ARR METHOD
     randomList.addEventListener('click', () => {
-        fetch('http://www.boredapi.com/api/activity/')
-        .then(res => res.json())
-        .then(data => {
-            let arr = []
-            data.forEach(activity => {
-                for(let i = 0; i < 10; i++){
-                    console.log(activity)
-                }
-            })
-        })
+       randomActList();  
     })
 
 })
@@ -68,4 +59,14 @@ function filterActivity(type) {
 function darkMode() {
     let darkModeBtn = document.querySelector('.dark-mode')
     console.log(darkModeBtn)
+}
+
+function randomActList() {
+    fetch('http://www.boredapi.com/api/activity/')
+    .then(res => res.json())
+    .then(data => {
+        let li = document.createElement('ul')
+        li.innerHTML = `<h6>${data.activity}</h6>`
+        document.querySelector('.list-activity').appendChild(li)
+    })
 }
