@@ -1,12 +1,12 @@
 document.addEventListener('DOMContentLoaded', () => {
     let randomBtn = document.querySelector('#random');
-    //FIRST EVENT LISTERNER
+    //FIRST EVENT LISTENER
     randomBtn.addEventListener('click', () => {
         findRandomActivity();
     });
 
     let form = document.querySelector('form');
-    //SECOND EVENT LISTERNER
+    //SECOND EVENT LISTENER
     form.addEventListener('submit', e => {
         e.preventDefault();
         let type = e.target.selector.value;
@@ -14,10 +14,25 @@ document.addEventListener('DOMContentLoaded', () => {
     })  
     
     let darkModeBtn = document.querySelector('.dark-mode')
-    //THIRD EVENT LISTERN
+    //THIRD EVENT LISTENER
     darkModeBtn.addEventListener('click', () => {
         console.log('click')
         darkMode();
+    })
+
+    let randomList = document.querySelector('.random-list')
+    //FOURTH EVENT LISTENER WITH ARR METHOD
+    randomList.addEventListener('click', () => {
+        fetch('http://www.boredapi.com/api/activity/')
+        .then(res => res.json())
+        .then(data => {
+            let arr = []
+            data.forEach(activity => {
+                for(let i = 0; i < 10; i++){
+                    console.log(activity)
+                }
+            })
+        })
     })
 
 })
