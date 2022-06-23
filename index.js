@@ -20,10 +20,13 @@ document.addEventListener('DOMContentLoaded', () => {
         darkMode();
     })
 
-    let randomList = document.querySelector('.random-list')
+    let clearListBtn = document.querySelector('.clear-list')
     //FOURTH EVENT LISTENER WITH ARR METHOD
-    randomList.addEventListener('click', () => {
-       randomActList();  
+    clearListBtn.addEventListener('click', () => {
+       let list = document.querySelector('.list-activity')
+       while(list.parentNode) [
+        list.removeChild(list.lastChild)
+       ]
     })
 
 })
@@ -35,7 +38,15 @@ function findRandomActivity() {
     .then(res => res.json())
     .then(data => {
         let randomAct = document.querySelector('.random-activity')
-        randomAct.innerHTML = `${data.activity}`
+        randomAct.innerHTML = `
+        ${data.activity}
+        <button class='add-to-list'>Add to List </button>
+        `
+        let addToListBtn = document.querySelector('.add-to-list')
+        addToListBtn.addEventListener('click', () => {
+            console.log('click')
+            AddList(data);
+        })
     })
 }
 
@@ -65,8 +76,12 @@ function randomActList() {
     fetch('http://www.boredapi.com/api/activity/')
     .then(res => res.json())
     .then(data => {
-        let li = document.createElement('ul')
-        li.innerHTML = `<h6>${data.activity}</h6>`
-        document.querySelector('.list-activity').appendChild(li)
+        AddList(data)
     })
+}
+
+function AddList(data) {
+    let li = document.createElement('ul')
+    li.innerHTML = `<h6>${data.activity}</h6>`
+    document.querySelector('.list-activity').appendChild(li)
 }
