@@ -1,3 +1,5 @@
+let arr =[];
+
 document.addEventListener('DOMContentLoaded', () => {
     let randomBtn = document.querySelector('#random');
     //FIRST EVENT LISTENER
@@ -24,9 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
     //FOURTH EVENT LISTENER WITH ARR METHOD
     clearListBtn.addEventListener('click', () => {
        let list = document.querySelector('.list-activity')
-       while(list.parentNode) [
-        list.removeChild(list.lastChild)
-       ]
+       list.innerHTML='';
     })
 
 })
@@ -44,7 +44,6 @@ function findRandomActivity() {
         `
         let addToListBtn = document.querySelector('.add-to-list')
         addToListBtn.addEventListener('click', () => {
-            console.log('click')
             AddList(data);
         })
     })
@@ -81,7 +80,12 @@ function randomActList() {
 }
 
 function AddList(data) {
+   
+    arr.push(data.activity)
     let li = document.createElement('ul')
     li.innerHTML = `<h6>${data.activity}</h6>`
     document.querySelector('.list-activity').appendChild(li)
+
+    console.log(arr)
+    
 }
