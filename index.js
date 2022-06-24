@@ -25,25 +25,30 @@ document.addEventListener('DOMContentLoaded', () => {
     let getList = document.querySelector('.generate-list')
     //FOURTH EVENT LISTENER
     getList.addEventListener('click', () => {
-        let listArr = [];
         console.log('click') 
-        for(let i = 0; i < 10; i++){
-            fetch('http://www.boredapi.com/api/activity/')
-            .then(res => res.json())
-            .then(data => {
-                console.log(data)
-                arr.push(data)
-            })
+        listItems();
 
-
-            }
+                     
 
        
-    })
-    
-
+    }) 
 })
 
+function listItems() {
+    const listArr =  [];
+    for(let i = 0; i < 10; i++){
+        fetch('http://www.boredapi.com/api/activity/')
+        .then(res => res.json())
+        .then(data => {      
+            
+            let li = document.createElement('li')
+            li.innerHTML = `${data.activity}`
+            document.querySelector('.list-activity').appendChild(li)
+        })
+     }
+    
+  
+}
 
 
 function findRandomActivity() {
