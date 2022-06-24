@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
         e.preventDefault();
         let type = e.target.selector.value;
         filterActivity(type);
+        createList();
     })  
     
     // let darkModeBtn = document.querySelector('.dark-mode')
@@ -33,7 +34,6 @@ function listItems() {
         fetch('http://www.boredapi.com/api/activity/')
         .then(res => res.json())
         .then(data => {
-            console.log(data);
             let li = document.createElement('li')
             li.innerHTML = `${data.activity}`
             document.querySelector('.list-activity').appendChild(li)
@@ -42,38 +42,17 @@ function listItems() {
 }
 
 //Need to combine listItems and findRandomActivity
-// function fetchActivit() {
-//     let result;
-//     const URL = 'http://www.boredapi.com/api/activity/';
-//     const fetchResult = fetch(URL);
-//     const response = await fetchResult;
-//     const data = await response.json();
-//     return data.activity
-
-//     fetch('http://www.boredapi.com/api/activity/')
-//     .then(res => res.json())
-//     .then(data => {
-//         result = data.activity
-//     })
-//     .then(() => console.log(result))
-//     return result
-// }
-
-
-
 
 function findRandomActivity() {
     fetch('http://www.boredapi.com/api/activity/')
     .then(res => res.json())
     .then(data => {
         let randomAct = document.querySelector('.random-activity')
-        console.log(data)
         randomAct.innerHTML = `${data.activity}`
     })
 }
 
 function filterActivity(type) {
-    let result;
     fetch(`http://www.boredapi.com/api/activity?type=${type}`)
     .then(res => res.json())
     .then(data => {
@@ -82,21 +61,56 @@ function filterActivity(type) {
         ${data.activity}
         <button class='add-to-list'>Add to your list</button?
         `
+        let activityObj= {
+            activity: `${data.activity}`,
+            type: `${data.type}`,
+        }
+
         let addBtn = document.querySelector('.add-to-list')
-        addBtn.addEventListener('click', () => {
-            console.log('click')
-            let li = document.createElement('li');
-            li.innerHTML = `${data.activity}`;
-            let myList = document.querySelector('.my-list')
-            myList.appendChild(li)
+        addBtn.addEventListener('click', e => {
+            fetch('http://localhost:3000/activities', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body:JSON.stringify(activityObj)
+            })
+            .then(res => res.json())
+            
+            
+
+
+
+            // let li = document.createElement('li');
+            // li.innerHTML = `${data.activity}`;
+            // let myList = document.querySelector('.my-list')
+            // myList.appendChild(li)
+
+
         })
     })
 }
 
-function darkMode() {
-    let darkModeBtn = document.querySelector('.dark-mode')
-    console.log(darkModeBtn)
+function createList() {
+    fetch('http://localhost:3000/activities')
+    .then(res => res.json())
+    .then(data => {
+        data.forEach(activity => {
+            //console.log(activity)
+            // let li = document.createElement('li');
+            // li.innerHTML = `${activity.activity}`;
+            // let myList = document.querySelector('.my-list')
+            // myList.appendChild(li)
+        })
+    })
 }
+
+
+
+// function darkMode() {
+//     let darkModeBtn = document.querySelector('.dark-mode')
+//     console.log(darkModeBtn)
+// }
 
 
 

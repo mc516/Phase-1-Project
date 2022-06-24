@@ -1,0 +1,14 @@
+{
+  "activities": [
+    {
+      "activity": "Watch a classic movie",
+      "type": "recreational",
+      "id": 1
+    },
+    {
+      "activity": "Solve a Rubik's cube",
+      "type": "recreational",
+      "id": 2
+    }
+  ]
+}
