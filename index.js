@@ -22,6 +22,24 @@ document.addEventListener('DOMContentLoaded', () => {
         darkMode();
     })
 
+    let getList = document.querySelector('.generate-list')
+    //FOURTH EVENT LISTENER
+    getList.addEventListener('click', () => {
+        let listArr = [];
+        console.log('click') 
+        for(let i = 0; i < 10; i++){
+            fetch('http://www.boredapi.com/api/activity/')
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+                arr.push(data)
+            })
+
+
+            }
+
+       
+    })
     
 
 })
