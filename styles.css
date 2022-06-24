@@ -4,6 +4,7 @@ header nav {
 
 body {
     background-color: white;
+    height: 125vh;
 }
 
 .container {
@@ -24,6 +25,11 @@ body {
 .li {
     list-style-type: none; 
     padding: -5px; 
+}
+
+.my-list {   
+    justify-content: center;
+    align-items: center;
 }
 
 

@@ -10,23 +10,21 @@ document.addEventListener('DOMContentLoaded', () => {
     form.addEventListener('submit', e => {
         e.preventDefault();
         let type = e.target.selector.value;
-        console.log(type)
         filterActivity(type);
     })  
     
-    let darkModeBtn = document.querySelector('.dark-mode')
-    //THIRD EVENT LISTENER
-    darkModeBtn.addEventListener('click', () => {
-        console.log('click')
-        darkMode();
-    })
+    // let darkModeBtn = document.querySelector('.dark-mode')
+    // //THIRD EVENT LISTENER
+    // darkModeBtn.addEventListener('click', () => {
+    //     console.log('click')
+    //     darkMode();
+    // })
 
     let getList = document.querySelector('.generate-list')
     //FOURTH EVENT LISTENER
     getList.addEventListener('click', () => {
         document.querySelector('.list-activity').innerHTML = '';
-        let items = listItems();
-        let li = document.querySelector('.list-activity')          
+        listItems();       
     }) 
 })
 
@@ -44,6 +42,25 @@ function listItems() {
 }
 
 //Need to combine listItems and findRandomActivity
+// function fetchActivit() {
+//     let result;
+//     const URL = 'http://www.boredapi.com/api/activity/';
+//     const fetchResult = fetch(URL);
+//     const response = await fetchResult;
+//     const data = await response.json();
+//     return data.activity
+
+//     fetch('http://www.boredapi.com/api/activity/')
+//     .then(res => res.json())
+//     .then(data => {
+//         result = data.activity
+//     })
+//     .then(() => console.log(result))
+//     return result
+// }
+
+
+
 
 function findRandomActivity() {
     fetch('http://www.boredapi.com/api/activity/')
@@ -61,7 +78,18 @@ function filterActivity(type) {
     .then(res => res.json())
     .then(data => {
         let activity = document.querySelector('.filtered-activity')
-        activity.innerHTML = `${data.activity}`
+        activity.innerHTML = `
+        ${data.activity}
+        <button class='add-to-list'>Add to your list</button?
+        `
+        let addBtn = document.querySelector('.add-to-list')
+        addBtn.addEventListener('click', () => {
+            console.log('click')
+            let li = document.createElement('li');
+            li.innerHTML = `${data.activity}`;
+            let myList = document.querySelector('.my-list')
+            myList.appendChild(li)
+        })
     })
 }
 
