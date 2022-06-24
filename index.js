@@ -11,7 +11,6 @@ document.addEventListener('DOMContentLoaded', () => {
         e.preventDefault();
         let type = e.target.selector.value;
         filterActivity(type);
-        createList();
     })  
     
     // let darkModeBtn = document.querySelector('.dark-mode')
@@ -57,10 +56,12 @@ function filterActivity(type) {
     .then(res => res.json())
     .then(data => {
         let activity = document.querySelector('.filtered-activity')
+
         activity.innerHTML = `
         ${data.activity}
         <button class='add-to-list'>Add to your list</button?
         `
+
         let activityObj= {
             activity: `${data.activity}`,
             type: `${data.type}`,
@@ -68,7 +69,15 @@ function filterActivity(type) {
 
         let addBtn = document.querySelector('.add-to-list')
         addBtn.addEventListener('click', e => {
-            fetch('http://localhost:3000/activities', {
+            getList(activityObj)                  
+        })
+
+       
+    })
+}
+
+function getList(activityObj) {
+    fetch('http://localhost:3000/activities', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -76,33 +85,13 @@ function filterActivity(type) {
                 body:JSON.stringify(activityObj)
             })
             .then(res => res.json())
-            
-            
-
-
-
-            // let li = document.createElement('li');
-            // li.innerHTML = `${data.activity}`;
-            // let myList = document.querySelector('.my-list')
-            // myList.appendChild(li)
-
-
-        })
-    })
-}
-
-function createList() {
-    fetch('http://localhost:3000/activities')
-    .then(res => res.json())
-    .then(data => {
-        data.forEach(activity => {
-            //console.log(activity)
-            // let li = document.createElement('li');
-            // li.innerHTML = `${activity.activity}`;
-            // let myList = document.querySelector('.my-list')
-            // myList.appendChild(li)
-        })
-    })
+            .then(data => {
+                console.log(data)
+                let myList = document.querySelector('.my-list')
+                let li = document.createElement('li');
+                li.innerHTML = `${data.activity}`;   
+                myList.appendChild(li)
+                })     
 }
 
 

@@ -1,13 +1,13 @@
 {
   "activities": [
     {
-      "activity": "Watch a classic movie",
-      "type": "recreational",
+      "activity": "Memorize the fifty states and their capitals",
+      "type": "education",
       "id": 1
     },
     {
-      "activity": "Solve a Rubik's cube",
-      "type": "recreational",
+      "activity": "Have a photo session with some friends",
+      "type": "social",
       "id": 2
     }
   ]
