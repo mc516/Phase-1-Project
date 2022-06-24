@@ -25,28 +25,36 @@ document.addEventListener('DOMContentLoaded', () => {
     let getList = document.querySelector('.generate-list')
     //FOURTH EVENT LISTENER
     getList.addEventListener('click', () => {
-        console.log('click') 
-        listItems();
-
-                     
+        document.querySelector('.list-activity').innerHTML = '';
+        let items = listItems();
+        let li = document.querySelector('.list-activity')
+       
+        // console.log(li.childNodes)
+        // listArr.push(li.childNodes)
+        // console.log(listArr)      
+        // console.log(listArr[0].innerHTML)     
 
        
     }) 
 })
 
-function listItems() {
-    const listArr =  [];
+async function listItems() {
+    let arr = [];
     for(let i = 0; i < 10; i++){
-        fetch('http://www.boredapi.com/api/activity/')
-        .then(res => res.json())
-        .then(data => {      
-            
-            let li = document.createElement('li')
-            li.innerHTML = `${data.activity}`
-            document.querySelector('.list-activity').appendChild(li)
-        })
-     }
-    
+        const URL = 'http://www.boredapi.com/api/activity/';
+        const fetchResult = fetch(URL);
+        const response = await fetchResult;
+        const data = await response.json();
+        
+        console.log(data);
+        let li = document.createElement('li')
+        li.innerHTML = `${data.activity}`
+        document.querySelector('.list-activity').appendChild(li)
+
+        arr.push(data.activity)
+    }
+    console.log(arr)
+    return arr
   
 }
 
