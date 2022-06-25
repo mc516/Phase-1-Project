@@ -19,19 +19,13 @@ document.addEventListener('DOMContentLoaded', () => {
         listItems();       
     }) 
 })
+
 function initialLoad() {
     fetch('http://localhost:3000/activities')
     .then(res => res.json())
     .then(data => {
-        console.log(data)
         data.forEach(element => {
-            let myList = document.querySelector('.my-list') //ADDS ITEM TO MY LIST
-            let li = document.createElement('li');
-            li.innerHTML = `
-            ${element.activity}
-            <button onclick="deleteItem(${element.id})" class='delete'>Done</button>
-            `;   
-            myList.appendChild(li)
+            createListWithDelete(element)
         })
     })
 }
@@ -45,18 +39,11 @@ function deleteItem(id) {
     })
     .then(res => res.json());
 
-    window.location.reload();
+    location.reload();
 }
 
 async function listItems() {
     for(let i = 0; i < 10; i++){
-        // fetch('http://www.boredapi.com/api/activity/')
-        // .then(res => res.json())
-        // .then(data => {
-        //     let li = document.createElement('li')
-        //     li.innerHTML = `${data.activity}`
-        //     document.querySelector('.list-activity').appendChild(li)
-        // })
         let data = await fetchRandomActivity();
         let li = document.createElement('li')
         li.innerHTML = `${data.activity}`
@@ -64,15 +51,7 @@ async function listItems() {
     }   
 }
 
-//Need to combine listItems and findRandomActivity (crate fetch function?)
-
 async function findRandomActivity() {
-    // fetch('http://www.boredapi.com/api/activity/')
-    // .then(res => res.json())
-    // .then(data => {
-    //     let randomAct = document.querySelector('.random-activity')
-    //     randomAct.innerHTML = `${data.activity}`
-    // })
     let data = await fetchRandomActivity();
     let randomAct = document.querySelector('.random-activity')
     randomAct.innerHTML = `${data.activity}`
@@ -102,14 +81,14 @@ function filterActivity(type) {
 
         let addBtn = document.querySelector('.add-to-list')
         addBtn.addEventListener('click', e => {
-            getList(activityObj)                  
+            addFilterActToList(activityObj)                  
         })
 
        
     })
 }
 
-function getList(activityObj) {
+function addFilterActToList(activityObj) {
     fetch('http://localhost:3000/activities', {
                 method: 'POST',
                 headers: {
@@ -119,12 +98,16 @@ function getList(activityObj) {
             })
             .then(res => res.json())
             .then(data => {
-                console.log(data)
-                let myList = document.querySelector('.my-list') //ADDS ITEM TO MY LIST
-                let li = document.createElement('li');
-                li.innerHTML = `${data.activity}`;   
-                myList.appendChild(li)
+                createListWithDelete(data)
                 })     
 }
 
-
+function createListWithDelete(obj) {
+    let myList = document.querySelector('.my-list') 
+    let li = document.createElement('li');
+    li.innerHTML = `
+    ${obj.activity}
+    <button onclick="deleteItem(${obj.id})" class='delete'>Done</button>
+    `;   
+    myList.appendChild(li)
+}
