@@ -1,29 +1,3 @@
 {
-  "activities": [
-    {
-      "activity": "Memorize the fifty states and their capitals",
-      "type": "education",
-      "id": 1
-    },
-    {
-      "activity": "Have a photo session with some friends",
-      "type": "social",
-      "id": 2
-    },
-    {
-      "activity": "Compliment someone",
-      "type": "social",
-      "id": 3
-    },
-    {
-      "activity": "Learn calligraphy",
-      "type": "education",
-      "id": 4
-    },
-    {
-      "activity": "Fix something that's broken in your house",
-      "type": "diy",
-      "id": 5
-    }
-  ]
+  "activities": []
 }

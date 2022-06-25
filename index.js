@@ -29,18 +29,9 @@ function initialLoad() {
             let li = document.createElement('li');
             li.innerHTML = `
             ${element.activity}
-            <button class='delete'>Done</button>
+            <button onclick="deleteItem(${element.id})" class='delete'>Done</button>
             `;   
             myList.appendChild(li)
-            
-        })
-
-        let deleteBtn = document.querySelectorAll('.delete');
-        deleteBtn.forEach(btn => {
-            btn.addEventListener('click', () => {
-                console.log('click')
-                
-            })
         })
     })
 }
@@ -52,7 +43,9 @@ function deleteItem(id) {
             'Content-Type': 'application/json'
         }
     })
-    .then(res => res.json())
+    .then(res => res.json());
+
+    window.location.reload();
 }
 
 function listItems() {
