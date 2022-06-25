@@ -45,9 +45,19 @@ function deleteItem(id) {
 async function listItems() {
     for(let i = 0; i < 10; i++){
         let data = await fetchRandomActivity();
-        let li = document.createElement('li')
-        li.innerHTML = `${data.activity}`
-        document.querySelector('.list-activity').appendChild(li)
+        let li = document.createElement('li');
+       
+
+        // let activityObj= {
+        //     activity: `${data.activity}`,
+        //     type: `${data.type}`,
+        // };    
+
+        li.innerHTML = `${data.activity}`; //Create button for list
+
+        document.querySelector('.list-activity').appendChild(li);
+
+            
     }   
 }
 
@@ -71,7 +81,7 @@ function filterActivity(type) {
 
         activity.innerHTML = `
         ${data.activity}
-        <button class='add-to-list'>Add to your list</button?
+        <button class='add-filter-to-list'>Add to your list</button>
         `
 
         let activityObj= {
@@ -79,16 +89,16 @@ function filterActivity(type) {
             type: `${data.type}`,
         }
 
-        let addBtn = document.querySelector('.add-to-list')
+        let addBtn = document.querySelector('.add-filter-to-list')
         addBtn.addEventListener('click', e => {
-            addFilterActToList(activityObj)                  
+            addToList(activityObj)                  
         })
 
        
     })
 }
 
-function addFilterActToList(activityObj) {
+function addToList(activityObj) {
     fetch('http://localhost:3000/activities', {
                 method: 'POST',
                 headers: {
@@ -107,7 +117,7 @@ function createListWithDelete(obj) {
     let li = document.createElement('li');
     li.innerHTML = `
     ${obj.activity}
-    <button onclick="deleteItem(${obj.id})" class='delete'>Done</button>
+    <button onclick="deleteItem(${obj.id})">Done</button>
     `;   
     myList.appendChild(li)
 }
