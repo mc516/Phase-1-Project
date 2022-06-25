@@ -48,27 +48,40 @@ function deleteItem(id) {
     window.location.reload();
 }
 
-function listItems() {
+async function listItems() {
     for(let i = 0; i < 10; i++){
-        fetch('http://www.boredapi.com/api/activity/')
-        .then(res => res.json())
-        .then(data => {
-            let li = document.createElement('li')
-            li.innerHTML = `${data.activity}`
-            document.querySelector('.list-activity').appendChild(li)
-        })
+        // fetch('http://www.boredapi.com/api/activity/')
+        // .then(res => res.json())
+        // .then(data => {
+        //     let li = document.createElement('li')
+        //     li.innerHTML = `${data.activity}`
+        //     document.querySelector('.list-activity').appendChild(li)
+        // })
+        let data = await fetchRandomActivity();
+        let li = document.createElement('li')
+        li.innerHTML = `${data.activity}`
+        document.querySelector('.list-activity').appendChild(li)
     }   
 }
 
 //Need to combine listItems and findRandomActivity (crate fetch function?)
 
-function findRandomActivity() {
-    fetch('http://www.boredapi.com/api/activity/')
-    .then(res => res.json())
-    .then(data => {
-        let randomAct = document.querySelector('.random-activity')
-        randomAct.innerHTML = `${data.activity}`
-    })
+async function findRandomActivity() {
+    // fetch('http://www.boredapi.com/api/activity/')
+    // .then(res => res.json())
+    // .then(data => {
+    //     let randomAct = document.querySelector('.random-activity')
+    //     randomAct.innerHTML = `${data.activity}`
+    // })
+    let data = await fetchRandomActivity();
+    let randomAct = document.querySelector('.random-activity')
+    randomAct.innerHTML = `${data.activity}`
+}
+
+async function fetchRandomActivity() {
+    const response = await fetch('http://www.boredapi.com/api/activity/');
+    const data = await response.json();
+    return data;
 }
 
 function filterActivity(type) {
