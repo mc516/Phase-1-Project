@@ -19,6 +19,11 @@
       "activity": "Learn calligraphy",
       "type": "education",
       "id": 4
+    },
+    {
+      "activity": "Fix something that's broken in your house",
+      "type": "diy",
+      "id": 5
     }
   ]
 }

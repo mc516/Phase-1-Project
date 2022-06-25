@@ -25,15 +25,35 @@ function initialLoad() {
     .then(data => {
         console.log(data)
         data.forEach(element => {
-            let myList = document.querySelector('.my-list')
+            let myList = document.querySelector('.my-list') //ADDS ITEM TO MY LIST
             let li = document.createElement('li');
-            li.innerHTML = `${element.activity}`;   
+            li.innerHTML = `
+            ${element.activity}
+            <button class='delete'>Done</button>
+            `;   
             myList.appendChild(li)
+            
         })
-        
+
+        let deleteBtn = document.querySelectorAll('.delete');
+        deleteBtn.forEach(btn => {
+            btn.addEventListener('click', () => {
+                console.log('click')
+                
+            })
+        })
     })
 }
 
+function deleteItem(id) {
+    fetch(`http://localhost:3000/activities/${id}`, {
+        method:'DELETE',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(res => res.json())
+}
 
 function listItems() {
     for(let i = 0; i < 10; i++){
@@ -47,7 +67,7 @@ function listItems() {
     }   
 }
 
-//Need to combine listItems and findRandomActivity
+//Need to combine listItems and findRandomActivity (crate fetch function?)
 
 function findRandomActivity() {
     fetch('http://www.boredapi.com/api/activity/')
@@ -94,21 +114,11 @@ function getList(activityObj) {
             .then(res => res.json())
             .then(data => {
                 console.log(data)
-                let myList = document.querySelector('.my-list')
+                let myList = document.querySelector('.my-list') //ADDS ITEM TO MY LIST
                 let li = document.createElement('li');
                 li.innerHTML = `${data.activity}`;   
                 myList.appendChild(li)
                 })     
 }
-
-function deleteAct() {
-
-}
-
-// function darkMode() {
-//     let darkModeBtn = document.querySelector('.dark-mode')
-//     console.log(darkModeBtn)
-// }
-
 
 
