@@ -1,32 +1,39 @@
 document.addEventListener('DOMContentLoaded', () => {
+    initialLoad();
+
     let randomBtn = document.querySelector('#random');
-    //FIRST EVENT LISTENER
     randomBtn.addEventListener('click', () => {
         findRandomActivity();
     });
 
     let form = document.querySelector('form');
-    //SECOND EVENT LISTENER
     form.addEventListener('submit', e => {
         e.preventDefault();
         let type = e.target.selector.value;
         filterActivity(type);
     })  
-    
-    // let darkModeBtn = document.querySelector('.dark-mode')
-    // //THIRD EVENT LISTENER
-    // darkModeBtn.addEventListener('click', () => {
-    //     console.log('click')
-    //     darkMode();
-    // })
 
     let getList = document.querySelector('.generate-list')
-    //FOURTH EVENT LISTENER
     getList.addEventListener('click', () => {
         document.querySelector('.list-activity').innerHTML = '';
         listItems();       
     }) 
 })
+function initialLoad() {
+    fetch('http://localhost:3000/activities')
+    .then(res => res.json())
+    .then(data => {
+        console.log(data)
+        data.forEach(element => {
+            let myList = document.querySelector('.my-list')
+            let li = document.createElement('li');
+            li.innerHTML = `${element.activity}`;   
+            myList.appendChild(li)
+        })
+        
+    })
+}
+
 
 function listItems() {
     for(let i = 0; i < 10; i++){
@@ -94,7 +101,9 @@ function getList(activityObj) {
                 })     
 }
 
+function deleteAct() {
 
+}
 
 // function darkMode() {
 //     let darkModeBtn = document.querySelector('.dark-mode')

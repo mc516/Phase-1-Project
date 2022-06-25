@@ -9,6 +9,16 @@
       "activity": "Have a photo session with some friends",
       "type": "social",
       "id": 2
+    },
+    {
+      "activity": "Compliment someone",
+      "type": "social",
+      "id": 3
+    },
+    {
+      "activity": "Learn calligraphy",
+      "type": "education",
+      "id": 4
     }
   ]
 }
