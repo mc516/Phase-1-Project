@@ -20,6 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }) 
 })
 
+
 function initialLoad() {
     fetch('http://localhost:3000/activities')
     .then(res => res.json())
@@ -30,36 +31,21 @@ function initialLoad() {
     })
 }
 
-function deleteItem(id) {
-    fetch(`http://localhost:3000/activities/${id}`, {
-        method:'DELETE',
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    })
-    .then(res => res.json());
-
-    location.reload();
-}
-
 async function listItems() {
     for(let i = 0; i < 10; i++){
         let data = await fetchRandomActivity();
         let li = document.createElement('li');
-       
 
-        // let activityObj= {
-        //     activity: `${data.activity}`,
-        //     type: `${data.type}`,
-        // };    
+        let activityObj= {
+            activity: `${data.activity}`,
+            type: `${data.type}`,
+        };    
 
-        li.innerHTML = `${data.activity}`; //Create button for list
-
-        document.querySelector('.list-activity').appendChild(li);
-
-            
+        li.innerHTML = `${data.activity}`; 
+        document.querySelector('.list-activity').appendChild(li);             
     }   
 }
+
 
 async function findRandomActivity() {
     let data = await fetchRandomActivity();
@@ -90,7 +76,7 @@ function filterActivity(type) {
         }
 
         let addBtn = document.querySelector('.add-filter-to-list')
-        addBtn.addEventListener('click', e => {
+        addBtn.addEventListener('click', () => {
             addToList(activityObj)                  
         })
 
@@ -117,7 +103,21 @@ function createListWithDelete(obj) {
     let li = document.createElement('li');
     li.innerHTML = `
     ${obj.activity}
-    <button onclick="deleteItem(${obj.id})">Done</button>
+    <button  class="delete">Done</button>
     `;   
     myList.appendChild(li)
+    document.querySelector('.delete').addEventListener('click', () => {
+        li.remove();
+        deleteItem(obj.id)
+    })
+}
+
+function deleteItem(id) {
+    fetch(`http://localhost:3000/activities/${id}`, {
+        method:'DELETE',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(res => res.json())
 }
