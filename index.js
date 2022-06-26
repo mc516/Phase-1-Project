@@ -31,32 +31,16 @@ function initialLoad() {
     })
 }
 
-async function listItems() {
-    for(let i = 0; i < 10; i++){
-        let data = await fetchRandomActivity();
-        let li = document.createElement('li');
-
-        let activityObj= {
-            activity: `${data.activity}`,
-            type: `${data.type}`,
-        };    
-
-        li.innerHTML = `${data.activity}`; 
-        document.querySelector('.list-activity').appendChild(li);             
-    }   
+async function fetchRandomActivity() {
+    const response = await fetch('http://www.boredapi.com/api/activity/');
+    const data = await response.json();
+    return data;
 }
-
 
 async function findRandomActivity() {
     let data = await fetchRandomActivity();
     let randomAct = document.querySelector('.random-activity')
     randomAct.innerHTML = `${data.activity}`
-}
-
-async function fetchRandomActivity() {
-    const response = await fetch('http://www.boredapi.com/api/activity/');
-    const data = await response.json();
-    return data;
 }
 
 function filterActivity(type) {
@@ -84,6 +68,26 @@ function filterActivity(type) {
     })
 }
 
+async function listItems() {
+    for(let i = 0; i < 10; i++){
+        let data = await fetchRandomActivity();
+        let li = document.createElement('li');
+
+        let activityObj= {
+            activity: `${data.activity}`,
+            type: `${data.type}`,
+        };    
+
+        li.innerHTML = `${data.activity}`; 
+        li.addEventListener('click', () => {
+            addToList(activityObj)
+        })
+        document.querySelector('.list-activity').appendChild(li);             
+    }   
+}
+
+
+
 function addToList(activityObj) {
     fetch('http://localhost:3000/activities', {
                 method: 'POST',
@@ -103,13 +107,16 @@ function createListWithDelete(obj) {
     let li = document.createElement('li');
     li.innerHTML = `
     ${obj.activity}
-    <button  class="delete">Done</button>
+    <button onclick="deleteItem(${obj.id})"class="delete">Done</button>
     `;   
     myList.appendChild(li)
-    document.querySelector('.delete').addEventListener('click', () => {
-        li.remove();
-        deleteItem(obj.id)
-    })
+    // document.querySelector('.delete').addEventListener('click', e => {
+    //     e.preventDefault()
+    //     console.log('click')
+    //     li.remove()
+    //     deleteItem(obj.id)
+
+    // })
 }
 
 function deleteItem(id) {
@@ -120,4 +127,6 @@ function deleteItem(id) {
         }
     })
     .then(res => res.json())
+
+    location.reload()
 }
