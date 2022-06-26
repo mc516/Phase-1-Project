@@ -107,16 +107,9 @@ function createListWithDelete(obj) {
     let li = document.createElement('li');
     li.innerHTML = `
     ${obj.activity}
-    <button onclick="deleteItem(${obj.id})"class="delete">Done</button>
+    <button onclick="deleteItem(${obj.id});li.remove()" class="delete">Done</button>
     `;   
     myList.appendChild(li)
-    // document.querySelector('.delete').addEventListener('click', e => {
-    //     e.preventDefault()
-    //     console.log('click')
-    //     li.remove()
-    //     deleteItem(obj.id)
-
-    // })
 }
 
 function deleteItem(id) {
