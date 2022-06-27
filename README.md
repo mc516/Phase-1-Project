@@ -11,9 +11,10 @@ Want something more specific? You can pick and choose what type of activity you 
 Add and delete activities from you list after you done with it.
 ![alt-text](./Gifs/DeleteActivity.gif)
 
-Still feel indecisive? Well pick a number from 1-10 and see what you get!
+Pick a lucky number between 1-10 and see what you get!
 ![alt-text](./Gifs/GetOptions.gif)
 
+Note: Make sure to have the json server up (json-server --watch db.json) to save the activities into your list if you need to come back to it later. 
 ### Resources
 <a href="https://www.boredapi.com/documentation">Bored API</a>
 
