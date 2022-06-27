@@ -72,21 +72,10 @@ async function listItems() {
     for(let i = 0; i < 10; i++){
         let data = await fetchRandomActivity();
         let li = document.createElement('li');
-
-        let activityObj= {
-            activity: `${data.activity}`,
-            type: `${data.type}`,
-        };    
-
         li.innerHTML = `${data.activity}`; 
-        li.addEventListener('click', () => {
-            addToList(activityObj)
-        })
         document.querySelector('.list-activity').appendChild(li);             
     }   
 }
-
-
 
 function addToList(activityObj) {
     fetch('http://localhost:3000/activities', {
@@ -121,5 +110,5 @@ function deleteItem(id) {
     })
     .then(res => res.json())
 
-    location.reload()
+    location.reload();
 }
