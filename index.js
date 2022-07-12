@@ -88,7 +88,9 @@ function addToList(activityObj) {
             .then(res => res.json())
             .then(data => {
                 createListWithDelete(data)
-                })     
+                console.log(data)
+                })  
+    // createListWithDelete(activityObj)               
 }
 
 function createListWithDelete(obj) {
@@ -96,14 +98,13 @@ function createListWithDelete(obj) {
     let li = document.createElement('li');
     li.innerHTML = `
     ${obj.activity}
-    <button class="delete">Done</button>
+    <button onclick="this.parentElement.remove() " id="delete">Done</button>
     `;   
     myList.appendChild(li)
-    document.querySelector('.delete').addEventListener('click', () => {
-        console.log("click")
+    document.querySelector('#delete').addEventListener('click', () => {
         deleteItem(obj.id);
-        li.remove()
     })
+
 }
 
 function deleteItem(id) {
@@ -113,5 +114,4 @@ function deleteItem(id) {
             'Content-Type': 'application/json'
         }
     })
-    .then(res => res.json())
 }
